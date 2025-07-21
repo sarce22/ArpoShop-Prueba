@@ -8,3 +8,16 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
+      #
+      - key: CLOUDINARY_NAME
+        value: dcv0rpbv2
+      - key: CLOUDINARY_KEY
+        value: JBSWGtKR5a-XhQJfH8hw9rulDNM
+      - key: CLOUDINARY_SECRET
+        value: 296377779622193
+
+
+databases:
+  - name: arposhop-db
+    databaseName: arposhop
+    user: arposhop
