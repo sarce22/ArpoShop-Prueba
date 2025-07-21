@@ -9,37 +9,41 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-@Entity(name= "user")
+@Entity
+@Table(name = "app_user") // Cambiado de "user" a "app_user" para evitar palabra reservada
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "id_user") // Mapeo explícito
 	private Long idUser;
 	
-	@Column(name= "nameUser")
+	@Column(name = "name_user") // Mapeo explícito
 	private String name;
 	
-	@Column(name= "surnameUser")
+	@Column(name = "surname_user") // Mapeo explícito
 	private String surname;
 	
+	@Column(name = "age")
 	private int age;
 	
-	@Column(unique = true)
+	@Column(name = "email", unique = true)
 	private String email;
 	
+	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "address")
 	private String address;
 	
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	
 	@ManyToOne
-	@JoinColumn (name = "idRol", referencedColumnName = "id_Rol")
+	@JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
 	private Rol idRol;
 
 	@OneToMany(mappedBy = "user")
@@ -66,6 +70,7 @@ public class User implements Serializable{
 		super();
 	}
 
+	// Getters y setters (sin cambios)
 	public Long getIdUser() {
 		return idUser;
 	}
@@ -153,6 +158,4 @@ public class User implements Serializable{
 	public void setOrdenes(List<Order> ordenes) {
 		this.ordenes = ordenes;
 	}
-	
-
 }

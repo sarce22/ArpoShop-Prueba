@@ -2,24 +2,25 @@ package com.arpo.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.Table;
 
 @Entity 
+@Table(name = "rol")
 public class Rol implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_rol")
 	private int id_Rol;
 	
+	@Column(name = "name_rol")
 	private String name_rol;
 	
 	public Rol(int id_Rol, String name_rol) {
@@ -31,6 +32,7 @@ public class Rol implements Serializable {
 	public Rol() {
 		super();
 	}
+	
 	public int getId_Rol() {
 		return id_Rol;
 	}
@@ -39,7 +41,6 @@ public class Rol implements Serializable {
 		this.id_Rol = id_Rol;
 	}
 
-
     public String getName_rol() {
         return name_rol;
     }
@@ -47,5 +48,4 @@ public class Rol implements Serializable {
     public void setName_rol(String name_rol) {
         this.name_rol = name_rol;
     }
-	
 }

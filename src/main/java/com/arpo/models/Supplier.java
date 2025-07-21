@@ -7,25 +7,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "supplier")
 public class Supplier implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_supplier")
 	private Long idSupplier;
 	
+	@Column(name = "name_supplier")
 	private String nameSupplier;
 	
-	@Column(name = "numberSupplier")
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "addressSupplier")
+	@Column(name = "address")
 	private String address;
 
 	public Supplier(Long idSupplier, String nameSupplier, String phoneNumber, String address) {
@@ -71,7 +72,4 @@ public class Supplier implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	
-		
 }

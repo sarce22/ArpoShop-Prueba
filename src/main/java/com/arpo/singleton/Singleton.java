@@ -34,8 +34,8 @@ public class Singleton {
             if (listUser.isEmpty()) {
                 System.out.println("🚀 Inicializando datos por defecto para demo...");
                 
-                // PASO 1: Crear roles si no existen
-                createRolesIfNotExist();
+                // PASO 1: Esperar un poco para que las tablas se creen
+                Thread.sleep(2000);
                 
                 // PASO 2: Crear usuarios por defecto
                 createDefaultUsers();
@@ -49,43 +49,6 @@ public class Singleton {
             e.printStackTrace();
             // Inicializar lista vacía para evitar errores
             listUser = new ArrayList<>();
-        }
-    }
-    
-    /**
-     * Crear roles por defecto si no existen en la base de datos
-     */
-    private void createRolesIfNotExist() {
-        try {
-            // Verificar roles existentes
-            var existingRoles = rolService.getRoleList();
-            
-            boolean clienteExists = existingRoles.stream().anyMatch(r -> r.getId_Rol() == 1);
-            boolean adminExists = existingRoles.stream().anyMatch(r -> r.getId_Rol() == 2);
-            
-            // Crear rol Cliente si no existe
-            if (!clienteExists) {
-                Rol clienteRole = new Rol();
-                clienteRole.setId_Rol(1);
-                clienteRole.setName_rol("Cliente");
-                // Nota: Si no tienes método save en RolService, comentar esta línea
-                // rolService.save(clienteRole);
-                System.out.println("✅ Rol 'Cliente' verificado");
-            }
-            
-            // Crear rol Administrador si no existe  
-            if (!adminExists) {
-                Rol adminRole = new Rol();
-                adminRole.setId_Rol(2);
-                adminRole.setName_rol("Administrador");
-                // Nota: Si no tienes método save en RolService, comentar esta línea
-                // rolService.save(adminRole);
-                System.out.println("✅ Rol 'Administrador' verificado");
-            }
-            
-        } catch (Exception e) {
-            System.err.println("⚠️  Error al crear roles: " + e.getMessage());
-            // Continuar con la ejecución - los roles se crearán por data.sql
         }
     }
     

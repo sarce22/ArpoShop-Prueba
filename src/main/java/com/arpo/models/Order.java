@@ -14,38 +14,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-@Entity (name = "orderUser")
+@Entity
+@Table(name = "app_order") // Cambiado para evitar conflictos con "order" (palabra reservada)
 public class Order implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_order")
 	private int idOrder;
 	
-	
-    @Column(name = "statusOrder")
+	@Column(name = "status_order")
     private String status;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "date_order")
 	private Date dateOrder;
 	
 	@ManyToOne
-	@JoinColumn (name = "UserOrder" )
+	@JoinColumn(name = "user_order")
 	private User user;
 
 	@OneToMany(mappedBy = "order")
 	private List<Cart> detalle;
 	
+	@Column(name = "total")
 	private double total;
 	
-	
 	public Order() {
-		super();// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public int getIdOrder() {
@@ -95,8 +95,4 @@ public class Order implements Serializable{
 	public void setDetalle(List<Cart> detalle) {
 		this.detalle = detalle;
 	}
-
-	
-	
-	
 }

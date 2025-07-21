@@ -9,48 +9,51 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "product")
 public class Product implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_product")
 	private Long idProduct;
 	
+	@Column(name = "name_product")
 	private String nameProduct;
-	@Column(name = "stockProducto")
+	
+	@Column(name = "stock_product") // Mapeo explícito y consistente
 	private int stock;
 	
+	@Column(name = "url_imagen")
 	private String urlImagen;
 	
+	@Column(name = "price")
 	private double price;
 	
+	@Column(name = "description")
 	private String description;
 	
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "idCategory", referencedColumnName="idCategoryProduct")
+	@JoinColumn(name = "id_category", referencedColumnName="id_category_product")
 	private CategoryProduct idCategory;
 	
 	@ManyToOne
-	@JoinColumn(name="idSupplier", referencedColumnName="idSupplier")
+	@JoinColumn(name="id_supplier", referencedColumnName="id_supplier")
 	private Supplier idSupplier;
-	
-
 
 	public Product() {
 		super();
 		this.urlImagen= "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
 	}
 
-	
 	public double getPrice() {
 		return price;
 	}
@@ -99,6 +102,14 @@ public class Product implements Serializable{
 		this.description = description;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public CategoryProduct getIdCategory() {
 		return idCategory;
 	}
@@ -114,5 +125,4 @@ public class Product implements Serializable{
 	public void setIdSupplier(Supplier idSupplier) {
 		this.idSupplier = idSupplier;
 	}
-
 }
